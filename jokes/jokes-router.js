@@ -11,7 +11,7 @@ router.get('/', restricted, (req, res) => {
   axios
     .get('https://icanhazdadjoke.com/search', requestOptions)
     .then(response => {
-      const token = generateToken
+      
       res.status(200).json(response.data.results);
     })
     .catch(err => {
@@ -19,15 +19,6 @@ router.get('/', restricted, (req, res) => {
     });
 });
 
-function generateToken(user) {
-  const payload = {
-      username: user.username
-  }
-  const secret = 'keep it secret, keep it safe'
-  const options = {
-      expiresIn: '1d'
-  }
-  return jwt.sign(payload, secret, options)
-}
+
 
 module.exports = router;
